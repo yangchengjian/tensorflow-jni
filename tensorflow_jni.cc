@@ -9,7 +9,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
-#include "tensorflow/examples/android/jni/tensorflow_jni.h"
+#include "jni_utils.h"
+#include "tensorflow_jni.h"
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 #include <android/bitmap.h>
@@ -25,7 +26,6 @@ limitations under the License.
 #include "tensorflow/core/public/env.h"
 #include "tensorflow/core/public/session.h"
 #include "tensorflow/core/public/tensor.h"
-#include "tensorflow/examples/android/jni/jni_utils.h"
 // Global variables that holds the Tensorflow classifier.
 static std::unique_ptr<tensorflow::Session> session;
 static std::vector<std::string> g_label_strings;
@@ -213,4 +213,10 @@ TENSORFLOW_METHOD(classifyImageBmp)(
     CHECK_EQ(AndroidBitmap_unlockPixels(env, bitmap),
              ANDROID_BITMAP_RESULT_SUCCESS);
     return env->NewStringUTF(result.c_str());
+}
+
+JNIEXPORT jstring JNICALL
+TENSORFLOW_METHOD(stringFromJNI)( 
+		JNIEnv* env, jobject thiz ){
+    return env->NewStringUTF("Hello from JNI !");
 }

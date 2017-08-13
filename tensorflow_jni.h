@@ -28,7 +28,7 @@ extern "C" {
 #endif  // __cplusplus
 
 #define TENSORFLOW_METHOD(METHOD_NAME) \
-  Java_org_tensorflow_demo_TensorflowClassifier_##METHOD_NAME  // NOLINT
+  Java_com_swarm_vision_DynetClassifier_##METHOD_NAME  // NOLINT
 
 JNIEXPORT jint JNICALL
 TENSORFLOW_METHOD(initializeTensorflow)(
@@ -43,6 +43,10 @@ TENSORFLOW_METHOD(classifyImageBmp)(
 JNIEXPORT jstring JNICALL
 TENSORFLOW_METHOD(classifyImageRgb)(
     JNIEnv* env, jobject thiz, jintArray image, jint width, jint height);
+
+JNIEXPORT jstring JNICALL
+TENSORFLOW_METHOD(stringFromJNI)(
+    JNIEnv* env, jobject thiz);
 
 #ifdef __cplusplus
 }  // extern "C"
